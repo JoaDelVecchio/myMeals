@@ -40,7 +40,7 @@ export const getMeal = async (req, res, next) => {
 
     const customMeal = customMeals.find((meal) => meal.idMeal === id);
     if (customMeal) {
-      res
+      return res
         .status(200)
         .json({ msg: "Meal found successfully", meal: customMeal });
     }
@@ -115,3 +115,7 @@ export const deleteMeal = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc UPDATE meal
+// @route /api/meals/:id
+export const updateMeal = (req, res, next) => {};
