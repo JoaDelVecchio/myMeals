@@ -1,8 +1,10 @@
 import express from "express";
-import { getMeals } from "../controllers/recipesController.js";
+import { createMeal, getMeals } from "../controllers/recipesController.js";
 
 const router = express.Router();
 
 router.get("/", getMeals);
+
+router.post("/", createMeal);
 
 export default router;
