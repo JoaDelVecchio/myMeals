@@ -37,16 +37,24 @@ export const getMeals = async (req, res, next) => {
 export const getMeal = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
-    if (!id) {
+
+    const customMeal = customMeals.find((meal) => meal.idMeal === id);
+    if (customMeal) {
+      res
+        .status(200)
+        .json({ msg: "Meal found successfully", meal: customMeal });
+    }
+
+    const response = await axios.get(`${API_BASE_URL}/lookup.php?i=${id}`);
+    const meal = response.data?.meals;
+
+    if (!meal) {
       const error = new Error(`Meal with id ${id} wasn't found`);
       error.status = 404;
       throw error;
     }
 
-    const response = await axios.get(`${API_BASE_URL}/lookup.php?i=${id}`);
-    const meal = response.data.meals;
-    res.json(meal);
+    res.status(200).json({ msg: "Meal found successfully", meal });
   } catch (error) {
     next(error);
   }
