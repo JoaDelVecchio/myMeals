@@ -46,9 +46,9 @@ export const getMeal = async (req, res, next) => {
     }
 
     const response = await axios.get(`${API_BASE_URL}/lookup.php?i=${id}`);
-    const meal = response.data?.meals;
+    const meal = response.data.meals;
 
-    if (!meal) {
+    if (meal == "Invalid ID") {
       const error = new Error(`Meal with id ${id} wasn't found`);
       error.status = 404;
       throw error;
@@ -83,6 +83,33 @@ export const createMeal = (req, res, next) => {
     res.status(201).json({
       msg: "A new meal has been created",
       meal: newMeal,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc DELETE a meal
+// @route /api/meals/:id
+
+export const deleteMeal = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const indexOfCustomMeal = customMeals.findIndex(
+      (meal) => meal.idMeal === id
+    );
+    if (indexOfCustomMeal == -1) {
+      const error = new Error(`The meal with id ${id} was not found`);
+      error.status = 404;
+      throw error;
+    }
+    const deletedMeal = customMeals[indexOfCustomMeal];
+    customMeals.splice(indexOfCustomMeal, 1);
+
+    res.status(200).json({
+      msg: `${deletedMeal.strMeal} was deleted`,
+      meal: deletedMeal,
     });
   } catch (error) {
     next(error);
