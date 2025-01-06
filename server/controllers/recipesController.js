@@ -12,10 +12,15 @@ const customMeals = [
   },
 ];
 
+// @desc GET all meals
+// @route /api/meals
+
 export const getMeals = async (req, res, next) => {
   try {
-    const chickenResponse = await axios.get(`${API_BASE_URL}chicken_breast`);
-    const beefResponse = await axios.get(`${API_BASE_URL}beef`);
+    const chickenResponse = await axios.get(
+      `${API_BASE_URL}/filter.php?i=chicken_breast`
+    );
+    const beefResponse = await axios.get(`${API_BASE_URL}/filter.php?i=beef`);
     res.json([
       ...chickenResponse.data.meals,
       ...beefResponse.data.meals,
@@ -25,6 +30,30 @@ export const getMeals = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc GET a meal
+// @route /api/meals/:id
+
+export const getMeal = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    if (!id) {
+      const error = new Error(`Meal with id ${id} wasn't found`);
+      error.status = 404;
+      throw error;
+    }
+
+    const response = await axios.get(`${API_BASE_URL}/lookup.php?i=${id}`);
+    const meal = response.data.meals;
+    res.json(meal);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc Create meals
+// @route /api/meals
 
 export const createMeal = (req, res, next) => {
   try {
