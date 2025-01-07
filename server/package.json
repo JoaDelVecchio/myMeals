@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node --watch server.js",
-    "start": "node --watch index.js"
+    "dev": "node --watch server.js",
+    "start": "node server.js"
   },
   "type": "module",
   "keywords": [],
