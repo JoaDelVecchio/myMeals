@@ -1,5 +1,5 @@
 import colors from "colors";
-export const logger = (req, res, next) => {
+const logger = (req, res, next) => {
   const methodColors = {
     GET: "green",
     POST: "blue",
@@ -16,3 +16,5 @@ export const logger = (req, res, next) => {
   );
   next();
 };
+
+export default logger;
