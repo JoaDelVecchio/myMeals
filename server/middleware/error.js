@@ -7,4 +7,4 @@ const errorHandler = (err, req, res, next) => {
   next();
 };
 
-export default error;
+export default errorHandler;

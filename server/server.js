@@ -1,12 +1,22 @@
+//Express
 import express from "express";
+
+//Routes
 import meals from "./routes/meals.js";
+
+//Middleware
+import cors from "cors";
 import logger from "./middleware/logger.js";
 import errorHandler from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
+
 const PORT = process.env.PORT || 8000;
 
 //Initialize express app
 const app = express();
+
+//Cors policy
+app.use(cors());
 
 //Logger middleware
 app.use(logger);
