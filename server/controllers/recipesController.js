@@ -118,4 +118,30 @@ export const deleteMeal = async (req, res, next) => {
 
 // @desc UPDATE meal
 // @route /api/meals/:id
-export const updateMeal = (req, res, next) => {};
+export const updateMeal = (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const mealUpdate = req.body;
+
+    const mealIndex = customMeals.findIndex((meal) => meal.idMeal === id);
+
+    if (mealIndex === -1) {
+      const error = new Error(`Meal with id ${id} wasn't found`);
+      error.status = 404;
+      throw error;
+    }
+
+    if (!req.body.strMeal || !req.body.strMealThumb) {
+      const error = new Error(`There are missing fields`);
+      error.status = 400;
+      throw error;
+    }
+
+    const mealUpdated = { ...customMeals[mealIndex], ...mealUpdate };
+    customMeals[mealIndex] = mealUpdated;
+
+    res.status(200).json({ msg: `Meal updated successfully`, mealUpdated });
+  } catch (error) {
+    next(error);
+  }
+};
