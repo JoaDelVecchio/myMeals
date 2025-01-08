@@ -16,7 +16,6 @@ function App() {
   const [mealSearched, setMealSearched] = useState<string>("");
 
   useFetchData({ setMeals, setError, setLoading });
-
   return loading ? (
     <Loading />
   ) : (
