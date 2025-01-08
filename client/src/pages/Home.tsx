@@ -4,15 +4,19 @@ import ErrorMessage from "../components/ErrorMessage";
 import Meal from "../components/Meal";
 
 const Home = ({
+  myMeals,
   mealSearched,
   meals,
   error,
   loading,
+  handleAddToMyMeals,
 }: {
+  myMeals: MealType[];
   mealSearched: string;
   meals: MealType[];
   error: string | null;
   loading: boolean;
+  handleAddToMyMeals: (id: string) => void;
 }) => {
   const filteredMeals = meals.filter((meal) =>
     meal.strMeal.toLowerCase().includes(mealSearched.toLowerCase())
@@ -29,7 +33,12 @@ const Home = ({
       {filteredMeals.length > 0 ? (
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {filteredMeals.map((meal) => (
-            <Meal key={meal.idMeal} meal={meal} />
+            <Meal
+              myMeals={myMeals}
+              handleAddToMyMeals={handleAddToMyMeals}
+              key={meal.idMeal}
+              meal={meal}
+            />
           ))}
         </ul>
       ) : (
