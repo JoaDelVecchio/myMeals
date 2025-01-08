@@ -11,7 +11,7 @@ export const getMeals = async (): Promise<Meal[]> => {
     const axiosError = error as AxiosError<{ error: string }>;
     console.error(
       `There was an error fetching data from ${API_BASE_URL}`,
-      error
+      axiosError.response?.data?.error
     );
     throw new Error(
       axiosError.response?.data?.error || "An unexpected error occurred"

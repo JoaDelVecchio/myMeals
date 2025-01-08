@@ -1,23 +1,22 @@
-// /hooks/useFetchData.ts
 import { useEffect } from "react";
 import { getMeals } from "../api/api";
 import { Meal } from "../types/meal";
 
-export const useFetchData = ({
+export const useFetchMeals = ({
   setMeals,
   setError,
   setLoading,
 }: {
   setMeals: React.Dispatch<React.SetStateAction<Meal[]>>;
-  setError: React.Dispatch<React.SetStateAction<string | null | undefined>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // Set loading to true before fetching
       try {
-        const meals = await getMeals();
-        setMeals(meals);
+        const fetchedMeals = await getMeals();
+        setMeals(fetchedMeals);
         setError(null); // Clear any previous errors
       } catch (error) {
         setError((error as Error).message);
@@ -27,5 +26,5 @@ export const useFetchData = ({
     };
 
     fetchData();
-  }, [setMeals, setError, setLoading]);
+  }, [setMeals, setError, setLoading]); // Add setters as dependencies
 };

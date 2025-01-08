@@ -1,17 +1,19 @@
 import { Meal as MealType } from "../types/meal";
-import Meal from "../components/Meal";
-import { useFetchData } from "../hooks/useFetchData";
-import ErrorMessage from "../components/ErrorMessage";
-import { useState } from "react";
 import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
+import Meal from "../components/Meal";
 
-const Home = ({ mealSearched }: { mealSearched: string }) => {
-  const [meals, setMeals] = useState<MealType[]>([]);
-  const [error, setError] = useState<string | null | undefined>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useFetchData({ setMeals, setError, setLoading });
-
+const Home = ({
+  mealSearched,
+  meals,
+  error,
+  loading,
+}: {
+  mealSearched: string;
+  meals: MealType[];
+  error: string | null;
+  loading: boolean;
+}) => {
   const filteredMeals = meals.filter((meal) =>
     meal.strMeal.toLowerCase().includes(mealSearched.toLowerCase())
   );
