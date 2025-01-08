@@ -24,7 +24,10 @@ function App() {
       <main className="p-6">
         {error && <ErrorMessage message={error} />}
         <Routes>
-          <Route path="/" element={<Home meals={meals} />} />
+          <Route
+            path="/"
+            element={<Home meals={meals} mealSearched={mealSearched} />}
+          />
           <Route path="/about" element={<About />} />
           <Route path="/myMeals" element={<MyMeals />} />
         </Routes>
