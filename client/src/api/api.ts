@@ -34,3 +34,17 @@ export const getMeal = async (id: string) => {
     ); // Throw an error with the message
   }
 };
+
+export const createMeal = async (formData: any) => {
+  try {
+    const response = await axios.post(API_BASE_URL, formData);
+    const data = response.data.meal;
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError<{ error: string }>;
+    console.error(`There was an error creating a new meal `, error);
+    throw new Error(
+      axiosError.response?.data?.error || "An unexpected error ocurred"
+    );
+  }
+};

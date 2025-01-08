@@ -38,7 +38,11 @@ function App() {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Header mealSearched={mealSearched} setMealSearched={setMealSearched} />
+      <Header
+        setMeals={setMeals}
+        mealSearched={mealSearched}
+        setMealSearched={setMealSearched}
+      />
       <main className="p-6">
         <Routes>
           <Route
