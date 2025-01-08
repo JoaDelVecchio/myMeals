@@ -1,22 +1,29 @@
 import { Meal as MealType } from "../types/meal";
 import Meal from "../components/Meal";
+import { useFetchData } from "../hooks/useFetchData";
+import ErrorMessage from "../components/ErrorMessage";
+import { useState } from "react";
+import Loading from "../components/Loading";
 
-const Home = ({
-  meals,
-  mealSearched,
-}: {
-  meals: MealType[];
-  mealSearched: string;
-}) => {
+const Home = ({ mealSearched }: { mealSearched: string }) => {
+  const [meals, setMeals] = useState<MealType[]>([]);
+  const [error, setError] = useState<string | null | undefined>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useFetchData({ setMeals, setError, setLoading });
+
   const filteredMeals = meals.filter((meal) =>
     meal.strMeal.toLowerCase().includes(mealSearched.toLowerCase())
   );
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900 text-center">
         Available Meals
       </h2>
+      {error && <ErrorMessage message={error} />}
       {filteredMeals.length > 0 ? (
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {filteredMeals.map((meal) => (

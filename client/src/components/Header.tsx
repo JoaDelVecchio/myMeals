@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/Logo.png";
 
 const Header = ({
@@ -15,10 +15,10 @@ const Header = ({
 
   return (
     <header className="flex justify-between items-center bg-gray-100 text-gray-800 p-4 md:p-6">
-      <div className="flex items-center space-x-3">
+      <Link to="/" className="flex items-center space-x-3">
         <img src={Logo} alt="ProteinPlates Logo" className="w-10 h-10" />
         <h1 className="text-2xl font-bold">ProteinPlates</h1>
-      </div>
+      </Link>
 
       {/* Search Input */}
       <div className="relative w-64">

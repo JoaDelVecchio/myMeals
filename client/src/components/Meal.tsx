@@ -9,7 +9,10 @@ const Meal = ({ meal }: { meal: MealType }) => {
       transition-transform
       duration-300 "
     >
-      <Link to="idMeal" className="text-gray-800 hover:text-blue-400 ">
+      <Link
+        to={`/mealDetails/${meal.idMeal}`}
+        className="text-gray-800 hover:text-blue-400 "
+      >
         <img
           src={meal.strMealThumb}
           alt={meal.strMeal}
