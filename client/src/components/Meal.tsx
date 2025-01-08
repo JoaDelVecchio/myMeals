@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Meal as MealType } from "../types/meal";
 
 const Meal = ({ meal }: { meal: MealType }) => {
@@ -9,14 +9,7 @@ const Meal = ({ meal }: { meal: MealType }) => {
       transition-transform
       duration-300 "
     >
-      <NavLink
-        to="idMeal"
-        className={({ isActive }) =>
-          `text-gray-800 hover:text-blue-400 ${
-            isActive ? "hover:text-blue-500" : ""
-          }`
-        }
-      >
+      <Link to="idMeal" className="text-gray-800 hover:text-blue-400 ">
         <img
           src={meal.strMealThumb}
           alt={meal.strMeal}
@@ -26,7 +19,7 @@ const Meal = ({ meal }: { meal: MealType }) => {
           <h3 className="text-lg font-semibold truncate">{meal.strMeal}</h3>
           <p>Click to see how to make it</p>
         </div>
-      </NavLink>
+      </Link>
     </li>
   );
 };
