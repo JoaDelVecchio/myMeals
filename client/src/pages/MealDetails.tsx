@@ -44,7 +44,7 @@ const MealDetails = () => {
 
         {/* Ingredients Section */}
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Ingredients</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           {ingredients.map((item, index) => (
             <li
               key={index}
