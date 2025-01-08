@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMeal } from "../api/api";
 import ErrorMessage from "../components/ErrorMessage";
+import Loading from "../components/Loading";
 
 const MealDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,9 +28,10 @@ const MealDetails = () => {
     fetchMeal();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
-  if (!meal) return <p>No meal found.</p>;
+  if (!meal) return <ErrorMessage message="No meal found" />;
+
   return (
     <div className="p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-3xl font-bold mb-4">{meal.strMeal}</h1>
