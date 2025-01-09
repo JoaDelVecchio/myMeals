@@ -11,8 +11,10 @@ const Header = ({
   mealSearched,
   setMealSearched,
   setMeals,
+  setMyMeals,
 }: {
   setMeals: React.Dispatch<React.SetStateAction<Meal[]>>;
+  setMyMeals: React.Dispatch<React.SetStateAction<Meal[]>>;
   mealSearched: string;
   setMealSearched: React.Dispatch<React.SetStateAction<string>>;
 }) => {
@@ -43,6 +45,7 @@ const Header = ({
       const newMeal = await createMeal(formData);
       console.log(newMeal);
       setMeals((prevMeals: Meal[]) => [...prevMeals, newMeal]);
+      setMyMeals((prevMeals: Meal[]) => [...prevMeals, newMeal]);
       alert("Meal created successfully!");
       setFormData({ strMeal: "", strMealThumb: "" });
       setIsFormOpen(false);
