@@ -12,8 +12,9 @@ export const useFetchMeals = ({
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   useEffect(() => {
+    setError(null); // Clear any previous errors
+    setLoading(true); // Set loading to true before fetching
     const fetchData = async () => {
-      setLoading(true); // Set loading to true before fetching
       try {
         const fetchedMeals = await getMeals();
         setMeals(fetchedMeals);

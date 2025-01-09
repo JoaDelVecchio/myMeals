@@ -7,6 +7,8 @@ const useFetchMeal = (id: string | undefined) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setError(null); // Clear any previous errors
+    setLoading(true);
     const fetchMeal = async () => {
       try {
         if (!id) {

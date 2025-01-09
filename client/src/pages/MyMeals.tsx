@@ -1,4 +1,4 @@
-import { Meal as MealType } from "../types/meal";
+import { Meal as MealInterface } from "../types/meal";
 
 import Meal from "../components/Meal";
 
@@ -6,7 +6,7 @@ const MyMeals = ({
   myMeals,
   handleAddToMyMeals,
 }: {
-  myMeals: MealType[];
+  myMeals: MealInterface[];
   handleAddToMyMeals: (id: string) => void;
 }) => {
   return (

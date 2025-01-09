@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
-import { Meal as MealType } from "../types/meal";
+import { Meal as MealInterface } from "../types/meal";
 
 const Meal = ({
   meal,
   handleAddToMyMeals,
   myMeals,
 }: {
-  meal: MealType;
-  myMeals: MealType[];
+  meal: MealInterface;
+  myMeals: MealInterface[];
   handleAddToMyMeals: (id: string) => void;
 }) => {
+  const isMyMeal = myMeals.some((elem) => elem.idMeal === meal.idMeal);
   return (
     <li className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl hover:bg-gray-50 transform hover:scale-105 transition-transform duration-300">
       <div>
@@ -32,9 +33,7 @@ const Meal = ({
             onClick={() => handleAddToMyMeals(meal.idMeal)}
             className="bg-blue-500 text-white px-2 py-1 rounded-md shadow-md hover:bg-blue-600 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
           >
-            {myMeals.some((elem) => elem.idMeal === meal.idMeal)
-              ? "Remove from my meals"
-              : "Add to my meals"}
+            {isMyMeal ? "Remove from my meals" : "Add to my meals"}
           </button>
         </div>
       </div>

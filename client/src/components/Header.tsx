@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import Logo from "../assets/Logo.png";
 import CustomMealForm from "./CustomMealForm";
-import { Meal } from "../types/meal";
+import { FormData, Meal } from "../types/meal";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 import { createMeal } from "../api/api";
@@ -21,7 +21,7 @@ const Header = ({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     strMeal: "",
     strMealThumb: "",
   });
@@ -46,7 +46,6 @@ const Header = ({
       console.log(newMeal);
       setMeals((prevMeals: Meal[]) => [...prevMeals, newMeal]);
       setMyMeals((prevMeals: Meal[]) => [...prevMeals, newMeal]);
-      alert("Meal created successfully!");
       setFormData({ strMeal: "", strMealThumb: "" });
       setIsFormOpen(false);
     } catch (error) {
